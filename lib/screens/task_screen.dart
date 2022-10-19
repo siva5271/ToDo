@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey/model/task_data.dart';
 
 import '../widgets/task_list.dart';
 import 'add_task_screen.dart';
 
 class TasksScreen extends StatelessWidget {
-  const TasksScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,14 +13,21 @@ class TasksScreen extends StatelessWidget {
         backgroundColor: Colors.lightBlueAccent,
         onPressed: () {
           showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              builder: (context) => SingleChildScrollView(
-                      child: Container(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: AddTaskScreen(),
-                  )));
+            context: context,
+            isScrollControlled: true,
+            builder: (context) => SingleChildScrollView(
+                child: Container(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: AddTaskScreen(callBackToTaskScreen: (newTaskTitle) {
+                // setState(() {
+                //   Provider.of<List<Task>>(context)
+                //       .add(Task(title: newTaskTitle));
+                // });
+                Navigator.pop(context);
+              }),
+            )),
+          );
         },
         child: Icon(Icons.add),
       ),
@@ -53,7 +60,7 @@ class TasksScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 30),
             child: Text(
-              '12 tasks',
+              '${Provider.of<ListOfTasks>(context).count} tasks',
               style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.w500,
@@ -72,7 +79,7 @@ class TasksScreen extends StatelessWidget {
                       topRight: Radius.circular(30))),
               child: TaskList(),
             ),
-          )
+          ),
         ],
       ),
     );

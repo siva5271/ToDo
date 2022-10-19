@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey/model/task_data.dart';
 
 class AddTaskScreen extends StatelessWidget {
+  final Function callBackToTaskScreen;
+  AddTaskScreen({required this.callBackToTaskScreen});
+  late String newTask;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,6 +40,9 @@ class AddTaskScreen extends StatelessWidget {
                         borderSide:
                             BorderSide(color: Colors.blueGrey, width: 5.0)),
                     labelText: 'Enter the task'),
+                onChanged: (value) {
+                  newTask = value;
+                },
               ),
               SizedBox(
                 height: 20,
@@ -43,13 +51,15 @@ class AddTaskScreen extends StatelessWidget {
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.lightBlueAccent,
                 ),
-                onPressed: () {},
-                child: Expanded(
-                  child: Text(
-                    'Add',
-                    style: TextStyle(
-                      fontSize: 25,
-                    ),
+                onPressed: () {
+                  Provider.of<ListOfTasks>(context, listen: false)
+                      .AddTask(newTask);
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  'Add',
+                  style: TextStyle(
+                    fontSize: 25,
                   ),
                 ),
               )
