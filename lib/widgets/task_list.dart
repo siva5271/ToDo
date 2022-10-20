@@ -17,15 +17,14 @@ class TaskList extends StatelessWidget {
             final Task currentTask = taskData.tasks[
                 index]; //The tasks are taken one by one from the ListOfTasks
             return Tasks(
-                isChecked: currentTask.isDone,
-                taskTitle: currentTask.title,
+                task: currentTask,
                 CheckBoxCallBack: (checkBoxState) {
                   //Upon clicking the checkbox the status of the tasks are updated
                   taskData.UpdateTask(currentTask);
                 },
-                LongPressCallBack: (title) {
+                DeleteTaskCallBack: (Task task) {
                   //This is used to delete the the items of choice by the user
-                  taskData.DeleteTask(title);
+                  taskData.DeleteTask(task);
                 });
           },
           itemCount: taskData.count,
