@@ -5,11 +5,13 @@ import 'package:todoey/model/task_data.dart';
 import '../widgets/task_list.dart';
 import 'add_task_screen.dart';
 
+//This is the home screen of the app
 class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        //The floating action button equipped to draw up a bottom sheet to add more tasks
         backgroundColor: Colors.lightBlueAccent,
         onPressed: () {
           showModalBottomSheet(
@@ -18,14 +20,11 @@ class TasksScreen extends StatelessWidget {
             builder: (context) => SingleChildScrollView(
                 child: Container(
               padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: AddTaskScreen(callBackToTaskScreen: (newTaskTitle) {
-                // setState(() {
-                //   Provider.of<List<Task>>(context)
-                //       .add(Task(title: newTaskTitle));
-                // });
-                Navigator.pop(context);
-              }),
+                  bottom: MediaQuery.of(context)
+                      .viewInsets
+                      .bottom), //This is used to make the popped up bottom sheet to be adjustable even when the keyboard is popped up
+              child:
+                  AddTaskScreen(), //The flow of code is diverted to the section concerning the addition of new tasks
             )),
           );
         },
@@ -60,7 +59,7 @@ class TasksScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 30),
             child: Text(
-              '${Provider.of<ListOfTasks>(context).count} tasks',
+              '${Provider.of<ListOfTasks>(context).count} tasks', //The number of tasks to be displayed is taken as the ListOFTasks's length
               style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.w500,
@@ -77,7 +76,8 @@ class TasksScreen extends StatelessWidget {
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30))),
-              child: TaskList(),
+              child:
+                  TaskList(), //The flow of control is transferred to TaskList
             ),
           ),
         ],

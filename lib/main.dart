@@ -10,7 +10,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => ListOfTasks(),
+      //ChangeNotifier encompasses the entire program to reset the values without any hiccup
+      create: (context) =>
+          ListOfTasks(), //The entire list of tasks to be displayed
       child: MaterialApp(
         home: TasksScreen(),
       ),

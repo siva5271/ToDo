@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
+//This widget contains the format in which the tiles are to be laid out
 class Tasks extends StatelessWidget {
   late bool isChecked;
   late final String taskTitle;
-  final Function CheckBoxCallBack;
-  final Function LongPressCallBack;
+  final Function
+      CheckBoxCallBack; //Callback to the parent widget when the checkbox corresponding to each item is pressed
+  final Function LongPressCallBack; //Callback to initiate deletion of items
   Tasks(
       {required this.isChecked,
       required this.LongPressCallBack,
@@ -14,7 +16,7 @@ class Tasks extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onLongPress: () {
-        LongPressCallBack(taskTitle);
+        LongPressCallBack(taskTitle); //Initiation of the deletion process
       },
       title: Text(
         taskTitle,

@@ -3,14 +3,15 @@ import 'package:provider/provider.dart';
 import 'package:todoey/model/task_data.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  final Function callBackToTaskScreen;
-  AddTaskScreen({required this.callBackToTaskScreen});
-  late String newTask;
+  late String newTask; //The task entered by the user
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xff757575),
+      //Two containers are laid over  one another to make the radius of curvature visible
+      color: Color(
+          0xff757575), //This is the inner component and is given the same colour as that of the background
       child: Container(
+        //This is the component  which will be visible to the user
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
@@ -41,6 +42,7 @@ class AddTaskScreen extends StatelessWidget {
                             BorderSide(color: Colors.blueGrey, width: 5.0)),
                     labelText: 'Enter the task'),
                 onChanged: (value) {
+                  //The newTask is being changed as the user types in
                   newTask = value;
                 },
               ),
@@ -48,12 +50,16 @@ class AddTaskScreen extends StatelessWidget {
                 height: 20,
               ),
               TextButton(
+                //The add button to add the entered new task
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.lightBlueAccent,
                 ),
                 onPressed: () {
-                  Provider.of<ListOfTasks>(context, listen: false)
-                      .AddTask(newTask);
+                  Provider.of<ListOfTasks>(context,
+                          listen:
+                              false) //Listening is set to false because the no change is to be made here hence the entire widget is not wrapped in a consumer widget
+                      .AddTask(
+                          newTask); //This one calls the AddTask function in ListOfTasks and passes in the task entered by the user
                   Navigator.pop(context);
                 },
                 child: Text(
